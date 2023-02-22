@@ -7,7 +7,8 @@ const dotenv = require('dotenv');
 
 
 //Importing Routes below
-const userRoutes = require('./routes/users')
+const userRoute = require('./routes/users');
+const authRoute = require('./routes/auth')
 
 //creating express application with name 'app'
 const app = express();
@@ -16,18 +17,22 @@ const app = express();
 dotenv.config();
 
 //connect to database
-mongoose.connect(process.env.MONGO_URL,()=>{
-    console.log("database connected ")
-});
+mongoose.connect(
+    process.env.MONGO_URL,
+    () => {
+        console.log("database connected ")
+    }
+);
 
 
 //Middlewares below
-app.use(express.json()); //this is a body parsor which parse data to json
+app.use(express.json()); //this is a body parsor which parse any request data to json
 app.use(helmet());
 app.use(morgan("common"))
 
-app.use('/api/users',userRoutes) //whenever /api/users will be called then userROutes will be called
+app.use('/api/users', userRoute) //whenever /api/users will be called then userRo utes will be called
+app.use('/api/auth', authRoute) //whenever /api/users will be called then userRoutes will be called
 
-app.listen(8800,()=>{
+app.listen(8800, () => {
     console.log("Backend Server is running!")
 })
