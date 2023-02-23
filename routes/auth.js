@@ -11,7 +11,7 @@ router.post("/register", async(req,res)=>{
     try{
         //encryting the password 'or' generating a new hased password
         const salt= await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(body.req.password,salt);
+        const hashedPassword = await bcrypt.hash(req.body.password,salt);
 
         //creating User 
         const user = await new User({
@@ -24,7 +24,7 @@ router.post("/register", async(req,res)=>{
 
         //Sending response back
         res.status(200).json(newUser)
-        res.send("ok")
+        // res.send("ok")
 
     } catch(err){
         console.log("error in register api",err)
