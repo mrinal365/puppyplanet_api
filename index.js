@@ -8,8 +8,8 @@ const dotenv = require('dotenv');
 
 //Importing Routes below
 const userRoute = require('./routes/users');
-const authRoute = require('./routes/auth')
-
+const authRoute = require('./routes/auth');
+const postRoute = require('./routes/post');
 //creating express application with name 'app'
 const app = express();
 
@@ -32,7 +32,7 @@ app.use(morgan("common"))
 
 app.use('/api/users', userRoute) //whenever /api/users will be called then userRo utes will be called
 app.use('/api/auth', authRoute) //whenever /api/users will be called then userRoutes will be called
-
+app.use('/api/posts', postRoute)
 app.listen(8800, () => {
     console.log("Backend Server is running!")
 })
